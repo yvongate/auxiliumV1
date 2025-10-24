@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+"""
+Script pour tester l'analyse IA avec une vraie image Supabase
+"""
+
+import requests
+from ia_client import analyze_emergency_with_ai
+
+def test_real_image_analysis():
+    """Teste l'analyse IA avec une vraie image Supabase"""
+    print("Test d'analyse IA avec image Supabase")
+    print("=" * 50)
+    
+    # Utiliser l'image de test qui vient d'être uploadée
+    test_image_url = "https://vuknogfptlcilsthhdgj.supabase.co/storage/v1/object/public/emergencies/test_photo_1761270068.jpg"
+    test_transcription = "Il y a un feu dans mon appartement avec beaucoup de fumee"
+    
+    print(f"Image Supabase: {test_image_url}")
+    print(f"Transcription: {test_transcription}")
+    print()
+    
+    # Test de l'analyse
+    print("Envoi de l'analyse a Colab...")
+    result = analyze_emergency_with_ai(
+        image_url=test_image_url,
+        transcription=test_transcription,
+        session_id=999
+    )
+    
+    print(f"\nResultat:")
+    print(f"   Success: {result.get('success')}")
+    
+    if result.get('success'):
+        ai_result = result.get('result', {})
+        print(f"   Urgence pompiers: {ai_result.get('urgence_pompiers')}")
+        print(f"   Niveau danger: {ai_result.get('niveau_danger')}")
+        print(f"   Description: {ai_result.get('description', 'N/A')}")
+        print(f"   Justification: {ai_result.get('justification', 'N/A')}")
+    else:
+        print(f"   Erreur: {result.get('error')}")
+    
+    return result.get('success', False)
+
+if __name__ == "__main__":
+    success = test_real_image_analysis()
+    if success:
+        print("\nTest reussi! Colab peut analyser les images Supabase.")
+    else:
+        print("\nTest echoue! Verifiez la connexion Colab.")

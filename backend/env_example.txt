@@ -1,0 +1,12 @@
+# Configuration Supabase pour Auxilium
+DATABASE_URL=postgresql://postgres:auxiliumseralechangement1%40@db.vuknogfptlcilsthhdgj.supabase.co:5432/postgres
+
+# Configuration API
+API_HOST=0.0.0.0
+API_PORT=8000
+DEBUG=True
+
+# Configuration Supabase Storage (si nécessaire)
+SUPABASE_URL=https://vuknogfptlcilsthhdgj.supabase.co
+SUPABASE_ANON_KEY=your_anon_key_here
+SUPABASE_SERVICE_KEY=your_service_key_here
